@@ -2,20 +2,21 @@ import {
   Alert,
   Pressable,
   StatusBar,
-  StyleSheet,
   Text,
   useColorScheme,
   View,
-} from 'react-native';
-import { Button } from 'react-native-macos';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+} from "react-native";
+import { Button } from "react-native-macos";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
+import "../global.css";
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === "dark";
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
       <AppContent />
     </SafeAreaProvider>
   );
@@ -23,39 +24,25 @@ function App() {
 
 function AppContent() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Hello World</Text>
+    <View className="p-safe flex-1 justify-center items-center bg-gray-200 gap-10">
+      <Text className="text-3xl text-center font-bold text-gray-800">
+        Hello World
+      </Text>
 
-      <View style={{ gap: 4, alignItems: 'center' }}>
+      <View className="gap-1 items-center">
         <Button
           title="I'm a native button"
-          onPress={() => Alert.alert('Clicked', 'Hi!')}
+          onPress={() => Alert.alert("Clicked", "Hi!")}
         />
         <Pressable
-          style={{ backgroundColor: '#2b9c76', padding: 10 }}
-          onPress={() => Alert.alert('Clicked', 'Hi!')}
+          className="bg-blue-600 p-2.5 active:bg-emerald-800 rounded-full"
+          onPress={() => Alert.alert("Clicked", "Hi!")}
         >
-          <Text>Me too!</Text>
+          <Text className="text-white">Me too!</Text>
         </Pressable>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eaeaea',
-    gap: 42,
-  },
-  text: {
-    fontSize: 32,
-    textAlign: 'center',
-    fontWeight: '700',
-    color: '#2D3748',
-  },
-});
 
 export default App;

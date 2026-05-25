@@ -35,7 +35,7 @@ function AppContent() {
           onPress={() => Alert.alert("Clicked", "Hi!")}
         />
         <Pressable
-          className="bg-blue-600 p-2.5 active:bg-emerald-800 rounded-full"
+          className="bg-emerald-600 p-2.5 active:bg-emerald-800 rounded-full"
           onPress={() => Alert.alert("Clicked", "Hi!")}
         >
           <Text className="text-white">Me too!</Text>

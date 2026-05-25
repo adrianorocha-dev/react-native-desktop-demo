@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "macos": "react-native run-macos",
+    "build:macos": "react-native build-macos --mode Release && APP_PATH=$(xcodebuild -workspace macos/MyApp.xcworkspace -scheme MyApp-macOS -sdk macosx -configuration Release -showBuildSettings -json 2>/dev/null | python3 -c \"import sys,json; settings=[s['buildSettings'] for s in json.load(sys.stdin) if s['buildSettings'].get('WRAPPER_EXTENSION')=='app'][0]; print(settings['TARGET_BUILD_DIR']+'/'+settings['FULL_PRODUCT_NAME'])\") && mkdir -p build && rm -rf build/MyApp.app && cp -R \"$APP_PATH\" build/",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",

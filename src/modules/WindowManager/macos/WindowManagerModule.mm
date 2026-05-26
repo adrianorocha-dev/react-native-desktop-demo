@@ -16,11 +16,21 @@ RCT_EXPORT_MODULE(WindowManager)
   return NSApp.mainWindow ?: [[NSApp windows] firstObject];
 }
 
-RCT_EXPORT_METHOD(setSize:(double)width height:(double)height) {
+RCT_EXPORT_METHOD(setSize:(double)width height:(double)height animated:(BOOL)animated) {
   dispatch_async(dispatch_get_main_queue(), ^{
     NSWindow *window = [self mainWindow];
     if (!window) return;
-    [window setContentSize:NSMakeSize(width, height)];
+    if (!animated) {
+      [window setContentSize:NSMakeSize(width, height)];
+      return;
+    }
+    NSRect currentFrame = window.frame;
+    NSSize newContentSize = NSMakeSize(width, height);
+    NSRect newContentRect = NSMakeRect(0, 0, newContentSize.width, newContentSize.height);
+    NSRect newFrame = [window frameRectForContentRect:newContentRect];
+    newFrame.origin.x = currentFrame.origin.x;
+    newFrame.origin.y = NSMaxY(currentFrame) - newFrame.size.height;
+    [window setFrame:newFrame display:YES animate:YES];
   });
 }
 

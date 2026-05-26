@@ -93,7 +93,7 @@ All methods except `getSize` are fire-and-forget (they dispatch to the main thre
 
 | Method | Signature | Description |
 |---|---|---|
-| `setSize` | `(width: number, height: number) => void` | Resize the window's content area. |
+| `setSize` | `(width: number, height: number, options?: SetSizeOptions) => void` | Resize the window's content area. On macOS, animates by default. |
 | `setMinSize` | `(width: number, height: number) => void` | Set minimum window dimensions. |
 | `setMaxSize` | `(width: number, height: number) => void` | Set maximum window dimensions. |
 | `setTitle` | `(title: string) => void` | Change the title bar text. |
@@ -104,12 +104,21 @@ All methods except `getSize` are fire-and-forget (they dispatch to the main thre
 | `getSize` | `() => Promise<{ width: number; height: number }>` | Returns the current content area size. |
 | `isAvailable` | `boolean` (getter) | `true` on macOS and Windows, `false` elsewhere. |
 
+### SetSizeOptions
+
+| Property | Type | Default | Description |
+|---|---|---|---|
+| `animated` | `boolean` | `true` on macOS, N/A on Windows | Smoothly animate the resize transition using the native AppKit animation. Only supported on macOS; the option is ignored on Windows. |
+
 ### Example
 
 ```ts
 WindowManager.setMinSize(400, 300);
 WindowManager.setSize(800, 600);
 WindowManager.center();
+
+// Disable animation for an instant resize on macOS
+WindowManager.setSize(1024, 768, { animated: false });
 
 const size = await WindowManager.getSize();
 console.log(`${size.width} x ${size.height}`);

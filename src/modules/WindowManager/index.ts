@@ -5,8 +5,12 @@ type Size = {
   height: number;
 };
 
+type SetSizeOptions = {
+  animated?: boolean;
+};
+
 type NativeWindowManager = {
-  setSize(width: number, height: number): void;
+  setSize(width: number, height: number, animated?: boolean): void;
   setMinSize(width: number, height: number): void;
   setMaxSize(width: number, height: number): void;
   setTitle(title: string): void;
@@ -33,8 +37,13 @@ function assertDesktop(): NativeWindowManager {
 }
 
 export const WindowManager = {
-  setSize(width: number, height: number): void {
-    assertDesktop().setSize(width, height);
+  setSize(width: number, height: number, options?: SetSizeOptions): void {
+    if (Platform.OS === "macos") {
+      const animated = options?.animated ?? true;
+      assertDesktop().setSize(width, height, animated);
+    } else {
+      assertDesktop().setSize(width, height);
+    }
   },
 
   setMinSize(width: number, height: number): void {

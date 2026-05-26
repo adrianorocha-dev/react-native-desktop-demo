@@ -22,7 +22,7 @@ const config = mergeConfig(getDefaultConfig(__dirname), {
 
 module.exports = withNativewind(config);
 
-// Metro doesn't re-transform global.css when source files change, so Tailwind
+// Metro doesn't re-transform ./src/global.css when source files change, so Tailwind
 // never sees new class names. Work around this by touching the CSS file whenever
 // a source file is saved, which forces Metro to re-run the PostCSS pipeline.
 // Only run during `react-native start` — the watcher holds the event loop open
@@ -32,7 +32,7 @@ const isBundling = process.argv.some(
 );
 
 if (!isBundling) {
-  const globalCssPath = path.resolve(__dirname, "global.css");
+  const globalCssPath = path.resolve(__dirname, "src", "global.css");
   const srcDir = path.resolve(__dirname, "src");
   let debounce;
   const watcher = fs.watch(srcDir, { recursive: true }, (_event, filename) => {

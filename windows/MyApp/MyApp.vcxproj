@@ -79,6 +79,7 @@
       <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>
         $(MSBuildThisFileDirectory);
+        $(MSBuildThisFileDirectory)..\..\src\modules\WindowManager\windows;
         %(AdditionalIncludeDirectories)
       </AdditionalIncludeDirectories>
     </ClCompile>
@@ -105,10 +106,12 @@
     <ClInclude Include="AutolinkedNativeModules.g.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="..\..\src\modules\WindowManager\windows\WindowManagerModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MyApp.cpp" />
     <ClCompile Include="AutolinkedNativeModules.g.cpp" />
+    <ClCompile Include="..\..\src\modules\WindowManager\windows\WindowManagerModule.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

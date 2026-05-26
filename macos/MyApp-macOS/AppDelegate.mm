@@ -13,7 +13,13 @@
   self.initialProps = @{};
   self.dependencyProvider = [RCTAppDependencyProvider new];
   
-  return [super applicationDidFinishLaunching:notification];
+  [super applicationDidFinishLaunching:notification];
+
+  // WINDOW_CONFIG_START
+  [self.window setContentSize:NSMakeSize(1000, 800)];
+  self.window.minSize = NSMakeSize(400, 300);
+  self.window.title = @"MyApp";
+  // WINDOW_CONFIG_END
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

@@ -22,7 +22,7 @@ NativeWind v5 is a thin wrapper around `react-native-css`, which handles CSS com
 
 **`postcss.config.mjs`** (new) — registers `@tailwindcss/postcss`.
 
-**`global.css`** (new) — imports Tailwind layers and the NativeWind theme (platform fonts, elevation, custom utilities). `@source "./src"` tells Tailwind where to scan for class names.
+**`src/global.css`** (new) — imports Tailwind layers and the NativeWind theme (platform fonts, elevation, custom utilities). `@source "./src"` tells Tailwind where to scan for class names.
 
 **`nativewind-env.d.ts`** (auto-generated) — adds `className` types to React Native components. Referenced from `tsconfig.json` (also auto-updated by `withNativewind` on first Metro start).
 

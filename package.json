@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "test:windows": "jest --config jest.config.windows.js"
+    "test:windows": "jest --config jest.config.windows.js",
+    "prebuild:desktop": "node scripts/prebuild-desktop.mjs"
   },
   "dependencies": {
     "@expo/metro-config": "~54.0.2",

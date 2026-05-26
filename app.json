@@ -1,4 +1,10 @@
 {
   "name": "MyApp",
-  "displayName": "MyApp"
+  "displayName": "MyApp",
+  "desktop": {
+    "initialSize": { "width": 1000, "height": 800 },
+    "minSize": { "width": 400, "height": 300 },
+    "title": "MyApp",
+    "resizable": true
+  }
 }

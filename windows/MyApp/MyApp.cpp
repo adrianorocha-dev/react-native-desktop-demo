@@ -68,10 +68,14 @@ _Use_decl_annotations_ int CALLBACK WinMain(HINSTANCE instance, HINSTANCE, PSTR 
   settings.UseDeveloperSupport(false);
 #endif
 
-  // Get the AppWindow so we can configure its initial title and size
   auto appWindow{reactNativeWin32App.AppWindow()};
+  // WINDOW_CONFIG_START
+  appWindow.Resize({1000, 800});
   appWindow.Title(L"MyApp");
-  appWindow.Resize({1000, 1000});
+  auto presenter = appWindow.Presenter().as<winrt::Microsoft::UI::Windowing::OverlappedPresenter>();
+  presenter.PreferredMinimumWidth(400);
+  presenter.PreferredMinimumHeight(300);
+  // WINDOW_CONFIG_END
 
   // Get the ReactViewOptions so we can set the initial RN component to load
   auto viewOptions{reactNativeWin32App.ReactViewOptions()};

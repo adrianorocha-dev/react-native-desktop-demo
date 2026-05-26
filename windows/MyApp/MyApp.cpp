@@ -70,7 +70,7 @@ _Use_decl_annotations_ int CALLBACK WinMain(HINSTANCE instance, HINSTANCE, PSTR 
 
   auto appWindow{reactNativeWin32App.AppWindow()};
   // WINDOW_CONFIG_START
-  appWindow.Resize({1000, 800});
+  appWindow.Resize({600, 400});
   appWindow.Title(L"MyApp");
   auto presenter = appWindow.Presenter().as<winrt::Microsoft::UI::Windowing::OverlappedPresenter>();
   presenter.PreferredMinimumWidth(400);

@@ -12,7 +12,7 @@ function App() {
       <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
 
       <View className="flex-1 justify-center items-center">
-        <Button className="cursor-pointer">Hello</Button>
+        <Button className="cursor-pointer">Hello world</Button>
       </View>
     </SafeAreaProvider>
   );

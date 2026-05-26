@@ -4,4 +4,8 @@
 @import "nativewind/theme";
 
 @source "./src";
-/* tw:1779800173830 */
+
+:root {
+  /*  navyblue */
+  --color-primary: #0d47a1;
+}

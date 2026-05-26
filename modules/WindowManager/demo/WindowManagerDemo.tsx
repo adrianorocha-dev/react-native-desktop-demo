@@ -1,5 +1,5 @@
 import { Alert, Pressable, ScrollView, Text, View } from "react-native";
-import { WindowManager } from "..";
+import { WindowManager } from "@modules/WindowManager";
 
 export function WindowManagerDemo() {
   return (

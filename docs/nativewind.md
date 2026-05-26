@@ -6,17 +6,17 @@ NativeWind v5 (`5.0.0-preview.4`) on a bare React Native 0.81 project with `reac
 
 NativeWind v5 is a thin wrapper around `react-native-css`, which handles CSS compilation, babel transforms, and runtime styling. Both require `@expo/metro-config` for the Metro CSS transformer, and `expo` because `@expo/metro-config` imports from it internally. This does not turn the project into an Expo project.
 
-| Package | Pin | Why pinned |
-|---|---|---|
-| `nativewind` | `^5.0.0-preview.4` | v5 targets Tailwind CSS v4 |
-| `react-native-css` | `^3.0.7` | peer dep of nativewind |
-| `tailwindcss` | `^4.3.0` | peer dep of nativewind (must be >4.1.11) |
-| `@tailwindcss/postcss` | `^4.3.0` | PostCSS plugin for Tailwind v4 |
-| `@expo/metro-config` | `~54.0.2` | must match Expo SDK 54 for react-native 0.81 |
-| `expo` | `~54.0.10` | required by `@expo/metro-config` internals |
-| `lightningcss` | `^1.30.1` | **1.32+ breaks react-native-css** with a deserialization error ("expected Specifier") |
-| `react-native-reanimated` | `~3.17.0` | Metro statically resolves `require("react-native-reanimated")` in react-native-css even though it's only called at runtime |
-| `react-native-worklets` | `^0.5.2` | required by react-native-reanimated |
+| Package                   | Pin                | Why pinned                                                                                                                 |
+| ------------------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| `nativewind`              | `^5.0.0-preview.4` | v5 targets Tailwind CSS v4                                                                                                 |
+| `react-native-css`        | `^3.0.7`           | peer dep of nativewind                                                                                                     |
+| `tailwindcss`             | `^4.3.0`           | peer dep of nativewind (must be >4.1.11)                                                                                   |
+| `@tailwindcss/postcss`    | `^4.3.0`           | PostCSS plugin for Tailwind v4                                                                                             |
+| `@expo/metro-config`      | `~54.0.2`          | must match Expo SDK 54 for react-native 0.81                                                                               |
+| `expo`                    | `~54.0.10`         | required by `@expo/metro-config` internals                                                                                 |
+| `lightningcss`            | `^1.30.1`          | **1.32+ breaks react-native-css** with a deserialization error ("expected Specifier")                                      |
+| `react-native-reanimated` | `~3.17.0`          | Metro statically resolves `require("react-native-reanimated")` in react-native-css even though it's only called at runtime |
+| `react-native-worklets`   | `^0.5.2`           | required by react-native-reanimated                                                                                        |
 
 ## Config files
 

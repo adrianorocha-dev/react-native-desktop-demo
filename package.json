@@ -3,14 +3,16 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "patch-package",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "macos": "react-native run-macos",
     "build:macos": "react-native build-macos --mode Release && APP_PATH=$(xcodebuild -workspace macos/MyApp.xcworkspace -scheme MyApp-macOS -sdk macosx -configuration Release -showBuildSettings -json 2>/dev/null | python3 -c \"import sys,json; settings=[s['buildSettings'] for s in json.load(sys.stdin) if s['buildSettings'].get('WRAPPER_EXTENSION')=='app'][0]; print(settings['TARGET_BUILD_DIR']+'/'+settings['FULL_PRODUCT_NAME'])\") && mkdir -p build && rm -rf build/MyApp.app && cp -R \"$APP_PATH\" build/",
+    "windows": "react-native run-windows",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "postinstall": "patch-package"
+    "test:windows": "jest --config jest.config.windows.js"
   },
   "dependencies": {
     "@expo/metro-config": "~54.0.2",
@@ -25,6 +27,7 @@
     "react-native-macos": "^0.81.7",
     "react-native-reanimated": "~3.17.0",
     "react-native-safe-area-context": "^5.5.2",
+    "react-native-windows": "^0.81.22",
     "react-native-worklets": "^0.5.2",
     "tailwindcss": "^4.3.0"
   },
@@ -47,9 +50,17 @@
     "patch-package": "^8.0.1",
     "prettier": "2.8.8",
     "react-test-renderer": "^19.1.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "@rnx-kit/jest-preset": "^0.1.17"
   },
   "engines": {
     "node": ">=20"
+  },
+  "react-native-windows": {
+    "init-windows": {
+      "name": "MyApp",
+      "namespace": "MyApp",
+      "template": "cpp-app"
+    }
   }
 }

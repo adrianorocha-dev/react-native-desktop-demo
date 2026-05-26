@@ -1,12 +1,12 @@
 import {
   Alert,
+  Button,
   Pressable,
   StatusBar,
   Text,
   useColorScheme,
   View,
 } from "react-native";
-import { Button } from "react-native-macos";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import "../global.css";
@@ -35,7 +35,7 @@ function AppContent() {
           onPress={() => Alert.alert("Clicked", "Hi!")}
         />
         <Pressable
-          className="bg-emerald-600 p-2.5 active:bg-emerald-800 rounded-full"
+          className="bg-emerald-600 p-2.5 active:bg-emerald-950 hover:bg-emerald-800 rounded-full"
           onPress={() => Alert.alert("Clicked", "Hi!")}
         >
           <Text className="text-white">Me too!</Text>

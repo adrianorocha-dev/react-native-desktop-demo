@@ -3,7 +3,22 @@ const path = require("path");
 const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config");
 const { withNativewind } = require("nativewind/metro");
 
-const config = mergeConfig(getDefaultConfig(__dirname), {});
+const rnwPath = fs.realpathSync(
+  path.resolve(require.resolve("react-native-windows/package.json"), ".."),
+);
+
+const config = mergeConfig(getDefaultConfig(__dirname), {
+  resolver: {
+    blockList: [
+      new RegExp(
+        `${path.resolve(__dirname, "windows").replace(/[/\\]/g, "/")}.*`,
+      ),
+      new RegExp(`${rnwPath}/build/.*`),
+      new RegExp(`${rnwPath}/target/.*`),
+      /.*\.ProjectImports\.zip/,
+    ],
+  },
+});
 
 module.exports = withNativewind(config);
 
@@ -15,8 +30,6 @@ module.exports = withNativewind(config);
 const isBundling = process.argv.some(
   (arg) => arg === "bundle" || arg.endsWith("/bundle.js"),
 );
-
-console.log("isBundling", isBundling);
 
 if (!isBundling) {
   const globalCssPath = path.resolve(__dirname, "global.css");

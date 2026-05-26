@@ -1,0 +1,71 @@
+diff --git a/node_modules/react-native-css/dist/commonjs/compiler/declarations.js b/node_modules/react-native-css/dist/commonjs/compiler/declarations.js
+index 22509fe..384857f 100644
+--- a/node_modules/react-native-css/dist/commonjs/compiler/declarations.js
++++ b/node_modules/react-native-css/dist/commonjs/compiler/declarations.js
+@@ -171,6 +171,7 @@ const parsers = {
+   "container": parseContainer,
+   "container-name": parseContainerName,
+   "container-type": parseContainerType,
++  "cursor": parseCursor,
+   "display": parseDisplay,
+   "direction": parseDirection,
+   "fill": parseSVGPaint,
+@@ -1847,6 +1848,11 @@ function parseDimension({
+       }
+   }
+ }
++function parseCursor({
++  value
++}) {
++  return value.keyword;
++}
+ function parseUserSelect({
+   value
+ }, builder) {
+diff --git a/node_modules/react-native-css/dist/module/compiler/declarations.js b/node_modules/react-native-css/dist/module/compiler/declarations.js
+index 9f4abf1..a28cdd5 100644
+--- a/node_modules/react-native-css/dist/module/compiler/declarations.js
++++ b/node_modules/react-native-css/dist/module/compiler/declarations.js
+@@ -90,6 +90,7 @@ const parsers = {
+   "container": parseContainer,
+   "container-name": parseContainerName,
+   "container-type": parseContainerType,
++  "cursor": parseCursor,
+   "display": parseDisplay,
+   "direction": parseDirection,
+   "fill": parseSVGPaint,
+@@ -1766,6 +1767,11 @@ export function parseDimension({
+       }
+   }
+ }
++function parseCursor({
++  value
++}) {
++  return value.keyword;
++}
+ export function parseUserSelect({
+   value
+ }, builder) {
+diff --git a/node_modules/react-native-css/src/compiler/declarations.ts b/node_modules/react-native-css/src/compiler/declarations.ts
+index df9e6d1..f34a0bb 100644
+--- a/node_modules/react-native-css/src/compiler/declarations.ts
++++ b/node_modules/react-native-css/src/compiler/declarations.ts
+@@ -157,6 +157,7 @@ const parsers: {
+   "container": parseContainer,
+   "container-name": parseContainerName,
+   "container-type": parseContainerType,
++  "cursor": parseCursor,
+   "display": parseDisplay,
+   "direction": parseDirection,
+   "fill": parseSVGPaint,
+@@ -2536,6 +2537,10 @@ export function parseDimension(
+   }
+ }
+ 
++function parseCursor({ value }: DeclarationType<"cursor">) {
++  return value.keyword;
++}
++
+ export function parseUserSelect(
+   { value }: DeclarationType<"user-select">,
+   builder: StylesheetBuilder,

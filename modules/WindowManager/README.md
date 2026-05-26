@@ -7,7 +7,6 @@ WindowManager has two parts:
 - **Prebuild config** — a Node script reads window properties from `app.json` and writes them into native source files before compilation. This sets the initial window size, title, and constraints without any JS bundle load delay.
 - **Runtime API** — a native module exposed to JS for resizing, repositioning, and toggling window properties at runtime.
 
-
 ## Prebuild config
 
 Define window properties under the `desktop` key in `app.json`:
@@ -41,13 +40,13 @@ The script is idempotent. Run it again after changing `app.json` and rebuild the
 
 ### Config properties
 
-| Property | Type | Description |
-|---|---|---|
-| `initialSize` | `{ width, height }` | Window size on launch (logical pixels). |
-| `minSize` | `{ width, height }` | Minimum window dimensions. |
-| `maxSize` | `{ width, height }` | Maximum window dimensions. |
-| `title` | `string` | Window title bar text. |
-| `resizable` | `boolean` | Whether the user can resize the window. Defaults to `true` if omitted. |
+| Property      | Type                | Description                                                            |
+| ------------- | ------------------- | ---------------------------------------------------------------------- |
+| `initialSize` | `{ width, height }` | Window size on launch (logical pixels).                                |
+| `minSize`     | `{ width, height }` | Minimum window dimensions.                                             |
+| `maxSize`     | `{ width, height }` | Maximum window dimensions.                                             |
+| `title`       | `string`            | Window title bar text.                                                 |
+| `resizable`   | `boolean`           | Whether the user can resize the window. Defaults to `true` if omitted. |
 
 All properties are optional.
 
@@ -82,7 +81,6 @@ The script checks for:
 
 It exits with an error before writing anything if validation fails.
 
-
 ## Runtime API
 
 ```ts
@@ -91,23 +89,23 @@ import { WindowManager } from "./modules/WindowManager";
 
 All methods except `getSize` are fire-and-forget (they dispatch to the main thread asynchronously).
 
-| Method | Signature | Description |
-|---|---|---|
-| `setSize` | `(width: number, height: number, options?: SetSizeOptions) => void` | Resize the window's content area. On macOS, animates by default. |
-| `setMinSize` | `(width: number, height: number) => void` | Set minimum window dimensions. |
-| `setMaxSize` | `(width: number, height: number) => void` | Set maximum window dimensions. |
-| `setTitle` | `(title: string) => void` | Change the title bar text. |
-| `setResizable` | `(resizable: boolean) => void` | Enable or disable user resizing. |
-| `setFullScreen` | `(fullScreen: boolean) => void` | Enter or exit fullscreen. |
-| `setAlwaysOnTop` | `(alwaysOnTop: boolean) => void` | Keep the window above other windows. |
-| `center` | `() => void` | Center the window on the current display. |
-| `getSize` | `() => Promise<{ width: number; height: number }>` | Returns the current content area size. |
-| `isAvailable` | `boolean` (getter) | `true` on macOS and Windows, `false` elsewhere. |
+| Method           | Signature                                                           | Description                                                      |
+| ---------------- | ------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `setSize`        | `(width: number, height: number, options?: SetSizeOptions) => void` | Resize the window's content area. On macOS, animates by default. |
+| `setMinSize`     | `(width: number, height: number) => void`                           | Set minimum window dimensions.                                   |
+| `setMaxSize`     | `(width: number, height: number) => void`                           | Set maximum window dimensions.                                   |
+| `setTitle`       | `(title: string) => void`                                           | Change the title bar text.                                       |
+| `setResizable`   | `(resizable: boolean) => void`                                      | Enable or disable user resizing.                                 |
+| `setFullScreen`  | `(fullScreen: boolean) => void`                                     | Enter or exit fullscreen.                                        |
+| `setAlwaysOnTop` | `(alwaysOnTop: boolean) => void`                                    | Keep the window above other windows.                             |
+| `center`         | `() => void`                                                        | Center the window on the current display.                        |
+| `getSize`        | `() => Promise<{ width: number; height: number }>`                  | Returns the current content area size.                           |
+| `isAvailable`    | `boolean` (getter)                                                  | `true` on macOS and Windows, `false` elsewhere.                  |
 
 ### SetSizeOptions
 
-| Property | Type | Default | Description |
-|---|---|---|---|
+| Property   | Type      | Default                         | Description                                                                                                                          |
+| ---------- | --------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `animated` | `boolean` | `true` on macOS, N/A on Windows | Smoothly animate the resize transition using the native AppKit animation. Only supported on macOS; the option is ignored on Windows. |
 
 ### Example
@@ -126,11 +124,10 @@ console.log(`${size.width} x ${size.height}`);
 
 Calling any method on a non-desktop platform throws an error. Check `WindowManager.isAvailable` first if you need to guard against this.
 
-
 ## File structure
 
 ```
-src/modules/WindowManager/
+modules/WindowManager/
   index.ts                  TypeScript API wrapping NativeModules.WindowManager
   macos/
     WindowManagerModule.mm  Obj-C module using NSWindow APIs
@@ -146,7 +143,6 @@ The native files are referenced by each platform's build system:
 
 - Xcode: `WindowManagerModule.mm` is listed in `project.pbxproj` as a source file for the `MyApp-macOS` target.
 - Visual Studio: `WindowManagerModule.h` and `.cpp` are listed in `MyApp.vcxproj` with an additional include directory pointing to the module's `windows/` folder.
-
 
 ## Adding a new prebuild property
 
